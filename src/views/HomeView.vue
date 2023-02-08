@@ -6,7 +6,14 @@
   import useRecipes from '@/composibles/recipes';
   import { onMounted, ref } from 'vue';
 
-  const { categories, areas, getCategories, getAreas } = useRecipes();
+  const {
+    categories,
+    areas,
+    getCategories,
+    getAreas,
+    getRecipesByCategory,
+    getRecipesByArea,
+  } = useRecipes();
 
   onMounted(() => {
     getCategories();
@@ -33,6 +40,7 @@
       <p>Lookup by Category</p>
       <Toggle
         class="toggle"
+        :disabled="areasSearch"
         @toggle="
           () => {
             categoriesSearch = !categoriesSearch;
@@ -42,6 +50,7 @@
       <p>Lookup by Area</p>
       <Toggle
         class="toggle"
+        :disabled="categoriesSearch"
         @toggle="
           () => {
             areasSearch = !areasSearch;
@@ -53,8 +62,24 @@
       v-if="!categoriesSearch && !areasSearch"
       :liveSearch="liveSearch"
     />
-    <Dropdown v-if="categoriesSearch" :dropdownList="categories" />
-    <Dropdown v-if="areasSearch" :dropdownList="areas" />
+    <Dropdown
+      v-if="categoriesSearch"
+      @optionSelected="
+        (option) => {
+          getRecipesByCategory(option);
+        }
+      "
+      :dropdownList="categories"
+    />
+    <Dropdown
+      v-if="areasSearch"
+      @optionSelected="
+        (option) => {
+          getRecipesByArea(option);
+        }
+      "
+      :dropdownList="areas"
+    />
   </div>
   <div class="mealListBackground">
     <MealList class="mealList" />

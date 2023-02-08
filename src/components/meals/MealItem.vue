@@ -18,7 +18,7 @@
 
 <style scoped>
   .recipeItem {
-    height: 16rem;
+    height: fit-content;
     width: 16rem;
     display: flex;
     flex-direction: column;
@@ -43,5 +43,9 @@
     color: #005e5d;
     text-decoration: inherit;
     text-align: center;
+  }
+
+  h3 {
+    padding: 0 0.5rem;
   }
 </style>

@@ -8,7 +8,12 @@
   <div class="dropdown">
     <button class="dropbtn">Dropdown</button>
     <div class="dropdown-content">
-      <a v-for="option in props.dropdownList" :key="option">{{ option }}</a>
+      <a
+        v-for="option in props.dropdownList"
+        :key="option"
+        @click="$emit('optionSelected', option)"
+        >{{ option }}</a
+      >
     </div>
   </div>
 </template>
@@ -16,7 +21,6 @@
 <style scoped>
   .dropbtn {
     background-color: #005e5d;
-    border-radius: 30px;
     color: white;
     padding: 16px;
     font-size: 16px;

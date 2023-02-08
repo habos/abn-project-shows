@@ -69,6 +69,30 @@ export default function useRecipes() {
     }
   };
 
+  const getRecipesByCategory = async (category: string) => {
+    try {
+      const response = await http.get(
+        `/api/json/v1/1/filter.php?c=${category}`
+      );
+      console.log(response.data);
+
+      recipes.value = response.data.meals;
+    } catch (error: any) {
+      console.log(error.message);
+    }
+  };
+
+  const getRecipesByArea = async (area: string) => {
+    try {
+      const response = await http.get(`/api/json/v1/1/filter.php?a=${area}`);
+      console.log(response.data);
+
+      recipes.value = response.data.meals;
+    } catch (error: any) {
+      console.log(error.message);
+    }
+  };
+
   return {
     recipe,
     recipes,
@@ -79,5 +103,7 @@ export default function useRecipes() {
     getRecipeDesc,
     getCategories,
     getAreas,
+    getRecipesByCategory,
+    getRecipesByArea,
   };
 }

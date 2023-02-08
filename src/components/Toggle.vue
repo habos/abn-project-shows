@@ -1,6 +1,16 @@
+<script setup lang="ts">
+  import { toRefs } from 'vue';
+
+  const props = defineProps<{
+    disabled: boolean;
+  }>();
+
+  const { disabled } = toRefs(props);
+</script>
+
 <template>
   <label class="switch">
-    <input type="checkbox" @click="$emit('toggle')" />
+    <input :disabled="disabled" type="checkbox" @click="$emit('toggle')" />
     <span class="slider round"></span>
   </label>
 </template>

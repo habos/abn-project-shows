@@ -22,7 +22,7 @@
     display: grid;
     align-items: center;
     grid-template-columns: repeat(3, 1fr);
-    grid-auto-rows: 20rem;
+    grid-auto-rows: 25rem;
   }
 
   h1 {
