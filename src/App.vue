@@ -5,4 +5,3 @@
 <template>
   <Layout />
 </template>
-

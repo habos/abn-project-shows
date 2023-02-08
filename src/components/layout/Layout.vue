@@ -6,9 +6,7 @@
 <template>
   <div id="layout" class="layout">
     <Header />
-    <div class="main-content">
-      <router-view />
-    </div>
+    <router-view />
   </div>
 </template>
 
@@ -16,5 +14,6 @@
   .layout {
     display: flex;
     flex-direction: column;
+    height: 100%;
   }
 </style>

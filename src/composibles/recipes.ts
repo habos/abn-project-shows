@@ -8,6 +8,8 @@ const http = axios.create({
 
 const recipe: any = ref([]);
 const recipes: Ref<any[]> = ref([]);
+const categories: Ref<string[]> = ref([]);
+const areas: Ref<string[]> = ref([]);
 
 export default function useRecipes() {
   const router = useRouter();
@@ -43,11 +45,39 @@ export default function useRecipes() {
     }
   };
 
+  const getCategories = async () => {
+    try {
+      const response = await http.get('/api/json/v1/1/list.php?c=list');
+      console.log(response.data);
+      categories.value = response.data.meals.map(
+        (val: { strCategory: string }) => val.strCategory
+      );
+    } catch (error: any) {
+      console.log(error.message);
+    }
+  };
+
+  const getAreas = async () => {
+    try {
+      const response = await http.get('/api/json/v1/1/list.php?a=list');
+      console.log(response.data);
+      areas.value = response.data.meals.map(
+        (val: { strArea: string }) => val.strArea
+      );
+    } catch (error: any) {
+      console.log(error.message);
+    }
+  };
+
   return {
     recipe,
     recipes,
+    categories,
+    areas,
     getRandomRecipe,
     getSearchedRecipes,
     getRecipeDesc,
+    getCategories,
+    getAreas,
   };
 }
