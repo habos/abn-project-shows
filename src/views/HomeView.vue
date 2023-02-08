@@ -14,18 +14,47 @@
   });
 
   const liveSearch = ref(false);
-  function changeSearch() {
-    console.log(liveSearch.value);
-    liveSearch.value = !liveSearch.value;
-  }
+  const categoriesSearch = ref(false);
+  const areasSearch = ref(false);
 </script>
 
 <template>
   <div class="search">
-    <SearchBar :liveSearch="liveSearch" />
-    <Toggle class="toggle" @toggle="changeSearch" />
-    <Dropdown :dropdownList="categories" />
-    <Dropdown :dropdownList="areas" />
+    <div class="optionsBox">
+      <p>Live Search</p>
+      <Toggle
+        class="toggle"
+        @toggle="
+          () => {
+            liveSearch = !liveSearch;
+          }
+        "
+      />
+      <p>Lookup by Category</p>
+      <Toggle
+        class="toggle"
+        @toggle="
+          () => {
+            categoriesSearch = !categoriesSearch;
+          }
+        "
+      />
+      <p>Lookup by Area</p>
+      <Toggle
+        class="toggle"
+        @toggle="
+          () => {
+            areasSearch = !areasSearch;
+          }
+        "
+      />
+    </div>
+    <SearchBar
+      v-if="!categoriesSearch && !areasSearch"
+      :liveSearch="liveSearch"
+    />
+    <Dropdown v-if="categoriesSearch" :dropdownList="categories" />
+    <Dropdown v-if="areasSearch" :dropdownList="areas" />
   </div>
   <div class="mealListBackground">
     <MealList class="mealList" />
@@ -41,6 +70,18 @@
     padding-top: 6rem;
     justify-content: center;
     align-items: center;
+  }
+
+  .optionsBox {
+    position: absolute;
+    top: 5rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    left: 5rem;
+    align-items: center;
+    grid-column-gap: 1rem;
+    color: #005e5d;
   }
 
   .toggle {
