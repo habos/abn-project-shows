@@ -1,6 +1,5 @@
 import { ref, type Ref } from 'vue';
 import axios from 'axios';
-import { useRouter } from 'vue-router';
 
 const http = axios.create({
   baseURL: 'https://www.themealdb.com',
@@ -12,8 +11,6 @@ const categories: Ref<string[]> = ref([]);
 const areas: Ref<string[]> = ref([]);
 
 export default function useRecipes() {
-  const router = useRouter();
-
   const getSearchedRecipes = async (name: string) => {
     try {
       const response = await http.get(`/api/json/v1/1/search.php?s=${name}`);

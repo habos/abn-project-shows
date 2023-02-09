@@ -1,5 +1,5 @@
 import { DOMWrapper, mount } from '@vue/test-utils';
-import Dropdown from '../Dropdown.vue';
+import Dropdown from '../DropDown.vue';
 import { describe, expect, test } from '@jest/globals';
 
 describe('mount dropdown', () => {

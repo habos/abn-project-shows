@@ -1,8 +1,8 @@
 <script setup lang="ts">
-  import Dropdown from '@/components/Dropdown.vue';
+  import Dropdown from '@/components/DropDown.vue';
   import MealList from '@/components/meals/MealList.vue';
   import SearchBar from '@/components/SearchBar.vue';
-  import Toggle from '@/components/Toggle.vue';
+  import Toggle from '@/components/ToggleButton.vue';
   import useRecipes from '@/composibles/recipes';
   import { onMounted, ref } from 'vue';
 

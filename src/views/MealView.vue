@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import useRecipes from '@/composibles/recipes';
-  import { computed } from '@vue/reactivity';
+  import { computed } from 'vue';
   import { onMounted } from 'vue';
   import { useRoute } from 'vue-router';
   const { recipe, getRecipeDesc } = useRecipes();

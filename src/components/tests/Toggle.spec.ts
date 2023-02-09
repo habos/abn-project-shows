@@ -1,5 +1,5 @@
-import { DOMWrapper, mount } from '@vue/test-utils';
-import Toggle from '../Toggle.vue';
+import { mount } from '@vue/test-utils';
+import Toggle from '../ToggleButton.vue';
 import { describe, expect, test } from '@jest/globals';
 
 describe('mount toggle (disabled false)', () => {
