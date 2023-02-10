@@ -2,7 +2,7 @@
   import { toRefs } from 'vue';
 
   const props = defineProps<{
-    disabled: boolean;
+    disabled?: boolean;
   }>();
 
   const { disabled } = toRefs(props);

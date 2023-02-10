@@ -6,10 +6,11 @@
     liveSearch: boolean;
   }>();
 
+  //Property to determine whether input will be processed on input event or not
   const { liveSearch } = toRefs(props);
   let searchInput: string = '';
+
   function search() {
-    console.log(liveSearch.value);
     useRecipes().getSearchedRecipes(searchInput);
   }
 </script>

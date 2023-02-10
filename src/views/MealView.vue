@@ -1,26 +1,33 @@
 <script setup lang="ts">
   import useRecipes from '@/composibles/recipes';
+  import type { Recipe } from '@/types';
   import { computed } from 'vue';
   import { onMounted } from 'vue';
   import { useRoute } from 'vue-router';
   const { recipe, getRecipeDesc } = useRecipes();
   const route = useRoute();
 
+  //Get recipe description based on id from url params
   onMounted(() => {
     getRecipeDesc(route.params.id as string);
   });
 
+  //Vars needed for grouping ingrediants
   let ingredientCount = 1;
   let ingrediantKey = (count: number) => 'strIngredient' + count;
   let amountKey = (count: number) => 'strMeasure' + count;
-
   const ingredientArr = new Array();
+
+  //Computed function to get an array of ingrediants and measurments from data
   const ingredients = computed(() => {
     Object.keys(recipe.value).forEach(function (key) {
-      if (key === ingrediantKey(ingredientCount) && recipe.value[key] !== '') {
+      if (
+        key === ingrediantKey(ingredientCount) &&
+        recipe.value[key as keyof Recipe] !== ''
+      ) {
         ingredientArr.push({
-          name: recipe.value[key],
-          amount: recipe.value[amountKey(ingredientCount)],
+          name: recipe.value[key as keyof Recipe],
+          amount: recipe.value[amountKey(ingredientCount) as keyof Recipe],
         });
         ingredientCount++;
       }
@@ -28,6 +35,7 @@
     return ingredientArr;
   });
 
+  //Replace youtube link string so it can be emmbeded
   const youtubeLink = computed(() => {
     return recipe.value.strYoutube
       ? recipe.value.strYoutube.replace('watch?v=', 'embed/')
@@ -53,6 +61,7 @@
 
         <p class="instructions">
           <iframe
+            v-if="youtubeLink !== ''"
             class="video"
             width="245"
             height="135"

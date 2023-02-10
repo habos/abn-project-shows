@@ -1,12 +1,13 @@
 <script setup lang="ts">
   const props = defineProps<{
-    dropdownList: any[];
+    dropdownList: string[];
+    title: string;
   }>();
 </script>
 
 <template>
   <div class="dropdown">
-    <button class="dropbtn">Dropdown</button>
+    <button class="dropbtn">{{ props.title }}</button>
     <div class="dropdown-content">
       <a
         v-for="option in props.dropdownList"

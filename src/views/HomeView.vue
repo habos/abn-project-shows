@@ -15,11 +15,13 @@
     getRecipesByArea,
   } = useRecipes();
 
+  //Get categories and areas for dropdown menus
   onMounted(() => {
     getCategories();
     getAreas();
   });
 
+  //Create refs for search state
   const liveSearch = ref(false);
   const categoriesSearch = ref(false);
   const areasSearch = ref(false);
@@ -70,6 +72,7 @@
         }
       "
       :dropdownList="categories"
+      title="Select Category"
     />
     <Dropdown
       v-if="areasSearch"
@@ -79,6 +82,7 @@
         }
       "
       :dropdownList="areas"
+      title="Select Area"
     />
   </div>
   <div class="mealListBackground">
