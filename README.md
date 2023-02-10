@@ -21,11 +21,11 @@ If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has a
 
 ### Frameworks
 
-I used the new Vue recommneded `create vue@3` to create a [Vite]('https://vitejs.dev/') powered Vue 3 project.  Vite gives a few advantages over Webpack such as an exteremly fast startup and hot-module replacement speed.  I also chose to use the Composable API within Vue 3 to allow for the use of composibles and refs which I utilized greatly in maintaining reactivity.
+I used the new Vue recommneded `create vue@3` to create a [Vite](https://vitejs.dev/) powered Vue 3 project.  Vite gives a few advantages over Webpack such as an exteremly fast startup and hot-module replacement speed.  I also chose to use the Composable API within Vue 3 to allow for the use of composibles and refs which I utilized greatly in maintaining reactivity.
 
 ### Included Libraries
 
-I did not add many libraries to the base template provided by `create vue@3`.  I used axios instead of fetch for the API calls because I am confortable with it.  I also added libraries for the Jest testing including [Vue Test Utils]('https://test-utils.vuejs.org/') and all its required dependencies for this project.
+I did not add many libraries to the base template provided by `create vue@3`.  I used axios instead of fetch for the API calls because I am confortable with it.  I also added libraries for the Jest testing including [Vue Test Utils](https://test-utils.vuejs.org/) and all its required dependencies for this project.
 
 ### Folder structure
 
