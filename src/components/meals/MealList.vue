@@ -4,6 +4,7 @@
   import MealItem from './MealItem.vue';
   const { recipes, getRandomRecipe } = useRecipes();
   onMounted(() => {
+    //Only refresh Recipes if there are none
     if (recipes.value.length < 1) {
       getRandomRecipe();
     }
@@ -12,7 +13,7 @@
 
 <template>
   <div v-if="recipes !== null" class="list">
-    <MealItem v-for="recipe in recipes" :key="recipe.id" :recipe="recipe" />
+    <MealItem v-for="recipe in recipes" :key="recipe.idMeal" :recipe="recipe" />
   </div>
   <h1 v-else>No Recipes Found</h1>
 </template>
