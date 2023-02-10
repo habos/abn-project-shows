@@ -7,6 +7,7 @@ describe('mount dropdown', () => {
   const wrapper = mount(Dropdown, {
     props: {
       dropdownList,
+      title: 'Drowdown',
     },
   });
 
