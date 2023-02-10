@@ -34,7 +34,7 @@
   }
 
   .image {
-    height: 75%;
+    height: 14rem;
     width: 100%;
     border-radius: 15% 15% 0px 0px;
   }

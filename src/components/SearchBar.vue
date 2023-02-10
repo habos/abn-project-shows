@@ -21,7 +21,6 @@
       id="searchQueryInput"
       type="text"
       name="searchQueryInput"
-      placeholder="Search"
       v-model="searchInput"
       v-on="liveSearch ? { input: search } : {}"
       @keypress.enter="search"

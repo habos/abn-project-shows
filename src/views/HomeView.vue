@@ -29,6 +29,33 @@
 
 <template>
   <div class="search">
+    <div class="searchBox">
+      <h2>What are you searching for?</h2>
+      <SearchBar
+        v-if="!categoriesSearch && !areasSearch"
+        :liveSearch="liveSearch"
+      />
+      <Dropdown
+        v-if="categoriesSearch"
+        @optionSelected="
+          (option) => {
+            getRecipesByCategory(option);
+          }
+        "
+        :dropdownList="categories"
+        title="Select Category"
+      />
+      <Dropdown
+        v-if="areasSearch"
+        @optionSelected="
+          (option) => {
+            getRecipesByArea(option);
+          }
+        "
+        :dropdownList="areas"
+        title="Select Area"
+      />
+    </div>
     <div class="optionsBox">
       <p>Live Search</p>
       <Toggle
@@ -60,30 +87,6 @@
         "
       />
     </div>
-    <SearchBar
-      v-if="!categoriesSearch && !areasSearch"
-      :liveSearch="liveSearch"
-    />
-    <Dropdown
-      v-if="categoriesSearch"
-      @optionSelected="
-        (option) => {
-          getRecipesByCategory(option);
-        }
-      "
-      :dropdownList="categories"
-      title="Select Category"
-    />
-    <Dropdown
-      v-if="areasSearch"
-      @optionSelected="
-        (option) => {
-          getRecipesByArea(option);
-        }
-      "
-      :dropdownList="areas"
-      title="Select Area"
-    />
   </div>
   <div class="mealListBackground">
     <MealList class="mealList" />
@@ -95,22 +98,25 @@
     display: flex;
     flex-direction: row;
     background-color: #e2edec;
-    min-height: 6rem;
-    padding-top: 6rem;
+    min-height: 12rem;
     justify-content: center;
     align-items: center;
   }
 
   .optionsBox {
-    position: absolute;
-    top: 5rem;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    left: 5rem;
     align-items: center;
     grid-column-gap: 1rem;
-    color: #005e5d;
+    color: #00816E;
+    font-weight: bold;
+    margin-left: 4rem;
+  }
+
+  h2 {
+    text-align: center;
+    color: #00816E;
   }
 
   .toggle {

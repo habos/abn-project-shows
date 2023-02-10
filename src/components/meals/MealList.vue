@@ -23,10 +23,11 @@
     display: grid;
     align-items: center;
     grid-template-columns: repeat(3, 1fr);
-    grid-auto-rows: 25rem;
+    grid-auto-rows: 21rem;
   }
 
   h1 {
+    margin-top: 3rem !important;
     text-align: center;
     color: #005e5d;
   }
