@@ -1,17 +1,10 @@
 <script setup lang="ts">
-  import useRecipes from '@/composibles/recipes';
-  import { toRefs } from 'vue';
+  import useRecipes from '@/composibles/shows';
 
-  const props = defineProps<{
-    liveSearch: boolean;
-  }>();
-
-  //Property to determine whether input will be processed on input event or not
-  const { liveSearch } = toRefs(props);
   let searchInput: string = '';
 
   function search() {
-    useRecipes().getSearchedRecipes(searchInput);
+    useRecipes().getSearchedShows(searchInput);
   }
 </script>
 
@@ -22,7 +15,7 @@
       type="text"
       name="searchQueryInput"
       v-model="searchInput"
-      v-on="liveSearch ? { input: search } : {}"
+      @input="search"
       @keypress.enter="search"
     />
     <button

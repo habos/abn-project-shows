@@ -1,17 +1,20 @@
 <script setup lang="ts">
   import { RouterLink } from 'vue-router';
   const props = defineProps<{
-    recipe: any;
+    show: any;
   }>();
 </script>
 
 <template>
-  <router-link
-    :to="{ name: 'description', params: { id: props.recipe.idMeal } }"
-  >
+  <router-link :to="{ name: 'description', params: { id: props.show.id } }">
     <div class="recipeItem">
-      <img class="image" :src="props.recipe.strMealThumb" alt="Meal Image" />
-      <h3 class="title">{{ props.recipe.strMeal }}</h3>
+      <img
+        v-if="props.show.image"
+        class="image"
+        :src="props.show.image.medium"
+        alt="Show Image"
+      />
+      <h3 class="title">{{ props.show.name }}</h3>
     </div>
   </router-link>
 </template>
@@ -19,14 +22,14 @@
 <style scoped>
   .recipeItem {
     height: fit-content;
-    width: 16rem;
+    width: 14rem;
     display: flex;
     flex-direction: column;
     margin: auto;
-    box-shadow: 0 0 15px gray;
     border-radius: 15%;
     transition-property: transform;
     transition-duration: 0.5s;
+    background-color: #e2edec;
   }
 
   .recipeItem:hover {

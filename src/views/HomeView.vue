@@ -1,95 +1,55 @@
 <script setup lang="ts">
-  import Dropdown from '@/components/DropDown.vue';
-  import MealList from '@/components/meals/MealList.vue';
   import SearchBar from '@/components/SearchBar.vue';
-  import Toggle from '@/components/ToggleButton.vue';
-  import useRecipes from '@/composibles/recipes';
+  import useShows from '@/composibles/shows';
+  import Carousel from '@/components/Carousel.vue';
   import { onMounted, ref } from 'vue';
+  import ShowList from '@/components/shows/ShowList.vue';
 
-  const {
-    categories,
-    areas,
-    getCategories,
-    getAreas,
-    getRecipesByCategory,
-    getRecipesByArea,
-  } = useRecipes();
+  const { getShows, shows, searchedShows } = useShows();
 
   //Get categories and areas for dropdown menus
-  onMounted(() => {
-    getCategories();
-    getAreas();
-  });
+  onMounted(getShows);
 
-  //Create refs for search state
-  const liveSearch = ref(false);
-  const categoriesSearch = ref(false);
-  const areasSearch = ref(false);
+  //Get a list of shows per genre sorted by rating
+  const genreList = (genre: string) => {
+    return shows.value
+      .filter((show: any) => {
+        if (show.genres.includes(genre)) return show;
+      })
+      .sort((a, b) => {
+        return a.rating
+          ? b.rating
+            ? b.rating.average - a.rating.average
+            : 1
+          : -1;
+      })
+      .slice(0, 10);
+  };
 </script>
 
 <template>
   <div class="search">
     <div class="searchBox">
       <h2>What are you searching for?</h2>
-      <SearchBar
-        v-if="!categoriesSearch && !areasSearch"
-        :liveSearch="liveSearch"
-      />
-      <Dropdown
-        v-if="categoriesSearch"
-        @optionSelected="
-          (option) => {
-            getRecipesByCategory(option);
-          }
-        "
-        :dropdownList="categories"
-        title="Select Category"
-      />
-      <Dropdown
-        v-if="areasSearch"
-        @optionSelected="
-          (option) => {
-            getRecipesByArea(option);
-          }
-        "
-        :dropdownList="areas"
-        title="Select Area"
-      />
-    </div>
-    <div class="optionsBox">
-      <p>Live Search</p>
-      <Toggle
-        class="toggle"
-        @toggle="
-          () => {
-            liveSearch = !liveSearch;
-          }
-        "
-      />
-      <p>Lookup by Category</p>
-      <Toggle
-        class="toggle"
-        :disabled="areasSearch"
-        @toggle="
-          () => {
-            categoriesSearch = !categoriesSearch;
-          }
-        "
-      />
-      <p>Lookup by Area</p>
-      <Toggle
-        class="toggle"
-        :disabled="categoriesSearch"
-        @toggle="
-          () => {
-            areasSearch = !areasSearch;
-          }
-        "
-      />
+      <SearchBar />
     </div>
   </div>
   <div class="mealListBackground">
-    <MealList class="mealList" />
+    <ShowList v-if="searchedShows !== undefined && searchedShows.length > 0" />
+    <div v-else>
+      <h3>Drama</h3>
+      <Carousel :cards="genreList('Drama')" />
+      <h3>Horror</h3>
+      <Carousel :cards="genreList('Horror')" />
+      <h3>Romance</h3>
+      <Carousel :cards="genreList('Romance')" />
+      <h3>Comedy</h3>
+      <Carousel :cards="genreList('Comedy')" />
+      <h3>Science-Fiction</h3>
+      <Carousel :cards="genreList('Science-Fiction')" />
+      <h3>Fantasy</h3>
+      <Carousel :cards="genreList('Fantasy')" />
+    </div>
   </div>
 </template>
 
@@ -109,14 +69,20 @@
     grid-template-rows: repeat(3, 1fr);
     align-items: center;
     grid-column-gap: 1rem;
-    color: #00816E;
+    color: #00816e;
     font-weight: bold;
     margin-left: 4rem;
   }
 
   h2 {
     text-align: center;
-    color: #00816E;
+    color: #00816e;
+  }
+
+  h3 {
+    margin-left: 2rem;
+    font-size: 1.4rem;
+    color: #00816e;
   }
 
   .toggle {
