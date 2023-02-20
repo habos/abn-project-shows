@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import { RouterLink } from 'vue-router';
+  import MissingImage from '../../assets/missing-image.png';
   const props = defineProps<{
     show: any;
   }>();
@@ -14,6 +15,7 @@
         :src="props.show.image.medium"
         alt="Show Image"
       />
+      <img v-else class="image" :src="MissingImage" alt="Show Missing Image" />
       <h3 class="title">{{ props.show.name }}</h3>
     </div>
   </router-link>

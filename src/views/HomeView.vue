@@ -36,7 +36,7 @@
   </div>
   <div class="mealListBackground">
     <ShowList v-if="searchedShows !== undefined && searchedShows.length > 0" />
-    <div v-else>
+    <div v-else-if="shows.length > 0">
       <h3>Drama</h3>
       <Carousel :cards="genreList('Drama')" />
       <h3>Horror</h3>
