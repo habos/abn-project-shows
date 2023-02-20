@@ -1,22 +1,27 @@
 <script setup lang="ts">
-  import { onMounted, ref } from 'vue';
+  import { onMounted, ref, toRefs } from 'vue';
 
   const props = defineProps<{
     rating: number;
   }>();
 
+  const { rating } = toRefs(props);
   const ratingRef = ref();
-  const ratingStyles = ref({});
+  const cw = ref();
 
   onMounted(() => {
-    const cw = ratingRef.value.clientWidth; // save original 100% pixel width
-
-    ratingRef.value.style.width = Math.round(cw * (props.rating / 10)) + 'px';
+    cw.value = ratingRef.value.clientWidth; // save original 100% pixel width
   });
+
+  const ratingStyles = () => {
+    return {
+      width: `${Math.round(cw.value * (rating.value / 10)) + 'px'}`,
+    };
+  };
 </script>
 
 <template>
-  <div ref="ratingRef" :style="ratingStyles" class="rating"></div>
+  <div ref="ratingRef" :style="ratingStyles()" class="rating"></div>
 </template>
 
 <style scoped>

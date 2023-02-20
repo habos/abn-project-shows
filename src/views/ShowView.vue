@@ -2,6 +2,8 @@
   import useShows from '@/composibles/shows';
   import { onMounted } from 'vue';
   import { useRoute } from 'vue-router';
+  import MissingImage from '../assets/missing-image.png';
+  import StarRating from '@/components/StarRating.vue';
   const { show, getShowInfo } = useShows();
   const route = useRoute();
 
@@ -12,76 +14,140 @@
 </script>
 
 <template>
-  <div class="detailsBackground">
-    <div class="detailsBox">
-      <div class="textBox">
-        <h1>{{ show.name }}</h1>
-        <h3>Summary</h3>
-        <p class="instructions" v-html="show.summary" />
+  <div v-if="show !== undefined" class="detailsBackground">
+    <div class="genreBar">
+      <div class="bar" />
+      <h4>{{ show.genres.join(' | ') }}</h4>
+    </div>
+    <div class="detailsContainer">
+      <h1>{{ show.name }}</h1>
+      <div class="showImgAndDetails">
+        <img
+          v-if="show.image"
+          class="image"
+          :src="show.image.medium"
+          alt="Show Image"
+        />
+        <img
+          v-else
+          class="image"
+          :src="MissingImage"
+          alt="Show Missing Image"
+        />
+        <div class="showDetails">
+          <h2>Show Info</h2>
+          <p v-if="show.network">
+            {{
+              'Network: ' + show.network.name + ', ' + show.network.country.code
+            }}
+          </p>
+          <p v-if="show.webChannel">
+            {{ 'Web Channel: ' + show.webChannel.name }}
+          </p>
+          <p v-if="show.schedule.days.length > 0">
+            {{
+              'Schedule: ' +
+              show.schedule.days[0] +
+              's at ' +
+              show.schedule.time
+            }}
+          </p>
+          <p v-if="show.averageRuntime">
+            {{ 'Runtime: ' + show.averageRuntime + ' minutes' }}
+          </p>
+          <p v-if="show.premiered">
+            {{ 'Premiered: ' + show.premiered }}
+          </p>
+          <p v-if="show.ended">
+            {{ 'Ended: ' + show.ended }}
+          </p>
+          <p v-if="show.status">
+            {{ 'Status: ' + show.status }}
+          </p>
+          <p v-if="show.type">
+            {{ 'Show Type: ' + show.type }}
+          </p>
+          <p v-if="show.rating.average">
+            Rating:
+            <StarRating :rating="show.rating.average" />
+          </p>
+        </div>
       </div>
-
-      <img
-        v-if="show.image"
-        class="image"
-        :src="show.image.medium"
-        alt="Meal Image"
-      />
+      <div class="description">
+        <h2>Description</h2>
+        <p v-html="show.summary"></p>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
   .detailsBackground {
-    height: fit-content;
-    background-color: #f8faf9;
-    display: flex;
+    height: 100%;
+    background-color: #1b1e21;
   }
 
-  .detailsBox {
-    height: fit-content;
-    width: 80%;
-    display: flex;
-    flex-direction: row;
-    margin: 3rem auto;
-    box-shadow: 0 0 15px gray;
-    border-radius: 15px;
-    color: #005e5d;
+  .detailsContainer {
+    width: 85%;
+    color: #fff;
+    margin: 4rem auto;
   }
 
-  .textBox {
-    margin-left: 3rem;
-    margin-bottom: 2rem;
-    width: 50%;
+  .genreBar {
+    margin-top: 3rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(217, 217, 217, 0.5);
+    box-shadow: 0px 0px 50px rgba(10, 207, 131, 0.5),
+      inset 0px 0px 20px rgba(10, 207, 131, 0.5);
+  }
+
+  h4 {
+    text-align: center;
+    width: 20%;
+    text-shadow: 0px 0px 25px #51aea7;
+    position: absolute;
+    left: 20%;
+    z-index: 2;
+    font-size: 15px;
+    color: #ffffff;
+    background-color: #1b1e21;
+    white-space: nowrap;
+  }
+
+  h1 {
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+
+  h2 {
+    font-size: 20px;
+    margin: 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid #fff;
   }
 
   img {
-    margin: 8rem auto auto auto;
-    width: 20rem;
-    border-radius: 15px;
+    width: 278px;
   }
 
-  h3 {
-    border-bottom: 1px solid black;
-    padding-bottom: 5px;
-  }
-
-  p {
-    margin: 5px 0;
-  }
-
-  .ingredients {
+  .showImgAndDetails {
+    min-height: 409px;
+    margin-bottom: 4rem;
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
-    border-bottom: 1px dashed;
   }
 
-  .instructions {
-    text-align: justify;
-  }
+  .showDetails {
+    width: 697px;
 
-  .video {
-    float: left;
-    padding: 0 15px 10px 0;
+    background: rgba(230, 242, 243, 0.16);
+    border-radius: 10px;
+    padding: 2rem;
   }
 </style>

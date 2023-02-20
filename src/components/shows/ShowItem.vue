@@ -4,12 +4,13 @@
   import StarRating from '../StarRating.vue';
   const props = defineProps<{
     show: any;
+    bigger?: boolean;
   }>();
 </script>
 
 <template>
   <router-link :to="{ name: 'description', params: { id: props.show.id } }">
-    <div class="showItem">
+    <div :class="props.bigger ? 'showItem bigger' : 'showItem'">
       <img
         v-if="props.show.image"
         class="image"
@@ -36,6 +37,10 @@
     border-radius: 15px;
     transition-property: transform;
     transition-duration: 0.5s;
+  }
+
+  .bigger {
+    transform: scale(1.6);
   }
 
   .showItem:hover {

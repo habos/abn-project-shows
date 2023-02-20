@@ -6,7 +6,12 @@
 
 <template>
   <div v-if="searchedShows !== null" class="list">
-    <ShowItem v-for="show in searchedShows" :key="show.id" :show="show" />
+    <ShowItem
+      v-for="show in searchedShows"
+      v-bind:key="show.id"
+      :bigger="true"
+      :show="show"
+    />
   </div>
   <h1 v-else>No Recipes Found</h1>
 </template>

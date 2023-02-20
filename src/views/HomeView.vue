@@ -2,12 +2,21 @@
   import useShows from '@/composibles/shows';
   import Carousel from '@/components/Carousel.vue';
   import { onMounted } from 'vue';
-  import ShowList from '@/components/shows/ShowList.vue';
 
-  const { getShows, shows, searchedShows } = useShows();
+  const { getShows, shows } = useShows();
 
   //Get categories and areas for dropdown menus
   onMounted(getShows);
+
+  //List of genres to display on homescreen
+  const genreArr = [
+    'Drama',
+    'Adventure',
+    'Comedy',
+    'Fantasy',
+    'Science-Fiction',
+    'Romance',
+  ];
 
   //Get a list of shows per genre sorted by rating
   const genreList = (genre: string) => {
@@ -29,28 +38,12 @@
 <template>
   <div class="showListBackground">
     <div class="showListContainer">
-      <ShowList
-        v-if="searchedShows !== undefined && searchedShows.length > 0"
-      />
-      <div v-else-if="shows.length > 0">
-        <h3>Drama</h3>
-        <div class="divider" />
-        <Carousel :cards="genreList('Drama')" />
-        <h3>Horror</h3>
-        <div class="divider" />
-        <Carousel :cards="genreList('Horror')" />
-        <h3>Romance</h3>
-        <div class="divider" />
-        <Carousel :cards="genreList('Romance')" />
-        <h3>Comedy</h3>
-        <div class="divider" />
-        <Carousel :cards="genreList('Comedy')" />
-        <h3>Science-Fiction</h3>
-        <div class="divider" />
-        <Carousel :cards="genreList('Science-Fiction')" />
-        <h3>Fantasy</h3>
-        <div class="divider" />
-        <Carousel :cards="genreList('Fantasy')" />
+      <div v-if="shows.length > 0">
+        <div v-for="genre in genreArr" :key="genre">
+          <h3>{{ genre }}</h3>
+          <div class="divider" />
+          <Carousel :cards="genreList(genre)" />
+        </div>
       </div>
     </div>
   </div>
@@ -64,7 +57,7 @@
 
   .showListContainer {
     width: 85%;
-    margin: auto;
+    margin: 3rem auto;
   }
 
   h2 {
@@ -85,14 +78,5 @@
     box-shadow: 0px 0px 50px rgba(10, 207, 131, 0.5),
       inset 0px 0px 20px rgba(10, 207, 131, 0.5);
     transform: matrix(1, 0, 0, -1, 0, 0);
-  }
-
-  .toggle {
-    margin-left: 0.5rem;
-  }
-
-  .showList {
-    width: 75%;
-    margin: 0 auto;
   }
 </style>

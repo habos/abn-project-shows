@@ -7,7 +7,9 @@
 <template>
   <div class="header">
     <div class="innerBox">
-      <img class="logo" height="30" :src="AbnAmro" />
+      <router-link :to="{ name: 'home' }">
+        <img class="logo" height="30" :src="AbnAmro" />
+      </router-link>
       <SearchBar class="searchBar" />
       <DropDown title="Genres" :dropdown-list="['Drama', 'Comedy', 'Horror']" />
     </div>

@@ -7,7 +7,7 @@ const http = axios.create({
 });
 
 //Refs for storing data
-const show: Ref<any> = ref({});
+const show: Ref<any> = ref();
 const shows: Ref<any[]> = ref([]);
 const searchedShows: Ref<any[]> = ref([]);
 
