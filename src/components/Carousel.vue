@@ -85,7 +85,10 @@
 
 <template>
   <div class="carousel-container">
-    <img :src="ArrowLeft" @click="prev" />
+    <div class="cardPreview left" />
+    <div class="navHolder prev" @click="prev">
+      <img class="prevImg" :src="ArrowLeft" />
+    </div>
     <div class="carousel">
       <div ref="inner" :style="innerStyles" class="inner">
         <div v-for="card in cards" :key="card" class="card">
@@ -93,7 +96,10 @@
         </div>
       </div>
     </div>
-    <img class="next" :src="ArrowRight" @click="next" />
+    <div class="cardPreview right" />
+    <div class="navHolder next" @click="next">
+      <img class="nextImg" :src="ArrowRight" />
+    </div>
   </div>
 </template>
 
@@ -106,7 +112,7 @@
     align-items: center;
   }
   .carousel {
-    width: 100%;
+    width: 85%;
     padding: 15px 0;
     overflow: hidden;
     display: inline-block;
@@ -114,24 +120,68 @@
   .inner {
     transition: transform 0.2s;
     white-space: nowrap;
-    padding: 0 10px;
   }
   .card {
-    margin-right: 20px;
+    margin-right: 14px;
     display: inline-flex;
   }
 
-  img {
-    position: absolute;
-    cursor: pointer;
-    width: 40px;
-    height: 40px;
-    z-index: 2;
-    background-color: white;
-    border-radius: 100px;
+  .cardPreview {
+    width: 106px;
+    height: 240px;
+    border-radius: 15px;
+    background: linear-gradient(
+      174.15deg,
+      rgba(81, 174, 167, 0.3) 9.29%,
+      rgba(217, 217, 217, 0) 92.94%
+    );
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   }
 
+  .left {
+    margin-right: 10px;
+  }
+
+  .right {
+    margin-left: 10px;
+  }
+
+  .navHolder {
+    position: absolute;
+    cursor: pointer;
+    width: 42px;
+    height: 42px;
+    z-index: 2;
+    background-color: #d9d9d9;
+    border-radius: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition-property: transform;
+    transition-duration: 0.5s;
+  }
+
+  .navHolder:hover {
+    transform: scale(1.1);
+  }
+
+  .prev {
+    left: -21px;
+  }
   .next {
-    right: 0;
+    right: -21px;
+  }
+
+  img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .prevImg {
+    margin-right: 3px;
+  }
+
+  .nextImg {
+    margin-left: 3px;
   }
 </style>

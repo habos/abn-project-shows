@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import { RouterLink } from 'vue-router';
   import MissingImage from '../../assets/missing-image.png';
+  import StarRating from '../StarRating.vue';
   const props = defineProps<{
     show: any;
   }>();
@@ -8,7 +9,7 @@
 
 <template>
   <router-link :to="{ name: 'description', params: { id: props.show.id } }">
-    <div class="recipeItem">
+    <div class="showItem">
       <img
         v-if="props.show.image"
         class="image"
@@ -17,40 +18,40 @@
       />
       <img v-else class="image" :src="MissingImage" alt="Show Missing Image" />
       <h3 class="title">{{ props.show.name }}</h3>
+      <StarRating :rating="props.show.rating.average" />
     </div>
   </router-link>
 </template>
 
 <style scoped>
-  .recipeItem {
+  .showItem {
     height: fit-content;
-    width: 14rem;
+    width: 10rem;
     display: flex;
     flex-direction: column;
+    align-items: center;
     margin: auto;
-    border-radius: 15%;
+    padding: 10px 0;
+    background: rgba(65, 114, 119, 0.19);
+    border-radius: 15px;
     transition-property: transform;
     transition-duration: 0.5s;
-    background-color: #e2edec;
   }
 
-  .recipeItem:hover {
+  .showItem:hover {
     transform: scale(1.05);
   }
 
   .image {
-    height: 14rem;
-    width: 100%;
-    border-radius: 15% 15% 0px 0px;
+    height: 9.8rem;
+    width: 85%;
   }
 
   a {
-    color: #005e5d;
+    color: #fff;
     text-decoration: inherit;
     text-align: center;
-  }
-
-  h3 {
-    padding: 0 0.5rem;
+    font-weight: normal;
+    font-size: 12px;
   }
 </style>
