@@ -1,13 +1,23 @@
 import { DOMWrapper, mount } from '@vue/test-utils';
 import Dropdown from '../DropDown.vue';
 import { describe, expect, test } from '@jest/globals';
+import { routes } from '../../router';
+import { createWebHistory, createRouter, type Router } from 'vue-router';
 
-describe('mount dropdown', () => {
+const router = createRouter({
+  history: createWebHistory(),
+  routes: routes,
+});
+
+describe('Testing props and text', () => {
   const dropdownList = ['Option1', 'Option2', 'Option3'];
   const wrapper = mount(Dropdown, {
     props: {
       dropdownList,
       title: 'Drowdown',
+    },
+    global: {
+      plugins: [router],
     },
   });
 
@@ -25,15 +35,25 @@ describe('mount dropdown', () => {
       expect(a.text()).toContain(b);
     }
   );
+});
 
-  wrapper.find('a').trigger('click');
+describe('Testing route on click', () => {
+  const dropdownList = ['Drama', 'Comedy'];
+  const wrapper = mount(Dropdown, {
+    props: {
+      dropdownList,
+      title: 'Drowdown',
+    },
+    global: {
+      plugins: [router],
+    },
+  });
 
-  test('emits when clicked', () => {
-    expect(wrapper.emitted()).toHaveProperty('optionSelected');
-    const optionEvent = wrapper.emitted('optionSelected');
-    if (optionEvent !== undefined) {
-      expect(optionEvent).toHaveLength(1);
-      expect(optionEvent[0]).toEqual(['Option1']);
-    }
+  test('Testing that home route is called on click', async () => {
+    const push = jest.spyOn(router, 'push');
+    await wrapper.find('a').trigger('click');
+
+    expect(push).toHaveBeenCalledTimes(1);
+    expect(push).toHaveBeenCalledWith({ name: 'home' });
   });
 });

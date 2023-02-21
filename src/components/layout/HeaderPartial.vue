@@ -37,7 +37,7 @@
   }
 
   #logo {
-    margin: 1rem -1rem 0 0;
+    margin: 1rem -1rem 2rem 0;
   }
 
   @media only screen and (min-width: 768px) {
@@ -53,6 +53,10 @@
 
     #header {
       height: 8rem;
+    }
+
+    #logo {
+      margin: 1rem -1rem 0 0;
     }
   }
 </style>
