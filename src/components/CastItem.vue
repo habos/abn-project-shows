@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import MissingImage from '../assets/missing-image.png';
+
   const props = defineProps<{
     castMember: any;
   }>();
@@ -39,8 +40,6 @@
     background: rgba(217, 217, 217, 0.5);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
     border-radius: 1px;
-    transition-property: transform;
-    transition-duration: 0.5s;
   }
 
   .image {

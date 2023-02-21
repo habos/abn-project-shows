@@ -45,6 +45,12 @@
     margin: 3rem auto;
   }
 
+  h1 {
+    color: #fff;
+    text-align: center;
+    height: 75vh;
+  }
+
   h2 {
     text-align: center;
     color: #00816e;

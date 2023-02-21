@@ -4,7 +4,7 @@
   import { useRoute } from 'vue-router';
   import MissingImage from '../assets/missing-image.png';
   import StarRating from '@/components/StarRating.vue';
-  import Carousel from '@/components/Carousel.vue';
+  import CarouselList from '@/components/CarouselList.vue';
   import { CardType } from '@/types';
   const { show, getShowInfo } = useShows();
   const route = useRoute();
@@ -81,7 +81,7 @@
       </div>
       <div v-if="show._embedded.cast.length > 0">
         <h2>Cast</h2>
-        <Carousel :card-type="CardType.Cast" :cards="show._embedded.cast" />
+        <CarouselList :card-type="CardType.Cast" :cards="show._embedded.cast" />
       </div>
     </div>
   </div>

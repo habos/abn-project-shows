@@ -4,14 +4,14 @@
 </script>
 
 <template>
-  <div id="layout" class="layout">
+  <div id="layout">
     <Header />
     <router-view />
   </div>
 </template>
 
 <style scoped>
-  .layout {
+  #layout {
     display: flex;
     flex-direction: column;
     height: 100%;

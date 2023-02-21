@@ -20,14 +20,17 @@
   onMounted(() => {
     setStep();
     resetTranslate();
+    prev();
   });
 
+  //Set width for transition based on card width and total amount of cards
   function setStep() {
     const innerWidth = inner.value.scrollWidth;
     const totalCards = cards.value.length;
     step.value = `${innerWidth / totalCards}px`;
   }
 
+  //Move one card to the right and add the first element of the array to the end
   function next() {
     if (transitioning.value) return;
     transitioning.value = true;
@@ -42,6 +45,7 @@
     });
   }
 
+  //Move one card to the left and add the last element to the beginning
   function prev() {
     if (transitioning.value) return;
     transitioning.value = true;
@@ -56,6 +60,7 @@
     });
   }
 
+  //Translate the inner box left
   function moveLeft() {
     innerStyles.value = {
       transform: `translateX(-${step.value})
@@ -63,6 +68,7 @@
     };
   }
 
+  //Translate the inner box right
   function moveRight() {
     innerStyles.value = {
       transform: `translateX(${step.value})
@@ -70,6 +76,7 @@
     };
   }
 
+  //Perform callback after transition
   function afterTransition(callback: any) {
     const listener = () => {
       callback();
@@ -78,6 +85,7 @@
     inner.value.addEventListener('transitionend', listener);
   }
 
+  //Reset the translate so that it is always one step the the left
   function resetTranslate() {
     innerStyles.value = {
       transition: 'none',
@@ -139,13 +147,13 @@
     white-space: nowrap;
   }
   .card {
-    margin-right: 14px;
+    margin-right: 0.875rem;
     display: inline-flex;
   }
 
   .cardPreview {
-    width: 106px;
-    height: 240px;
+    width: 6.625rem;
+    height: 15rem;
     border-radius: 15px;
     background: linear-gradient(
       174.15deg,
@@ -156,26 +164,26 @@
   }
 
   .cardPreviewSmall {
-    height: 160px;
+    height: 10rem;
     display: none;
   }
 
   .left {
-    margin-right: 10px;
+    margin-right: 0.625rem;
   }
 
   .right {
-    margin-left: 10px;
+    margin-left: 0.625rem;
   }
 
   .navHolder {
     position: absolute;
     cursor: pointer;
-    width: 42px;
-    height: 42px;
+    width: 2.625rem;
+    height: 2.625rem;
     z-index: 2;
     background-color: #d9d9d9;
-    border-radius: 100px;
+    border-radius: 6.25rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -195,8 +203,8 @@
   }
 
   img {
-    width: 20px;
-    height: 20px;
+    width: 1.25rem;
+    height: 1.25rem;
   }
 
   .prevImg {

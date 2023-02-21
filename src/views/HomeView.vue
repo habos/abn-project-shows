@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import useShows from '@/composibles/shows';
-  import Carousel from '@/components/Carousel.vue';
+  import CarouselList from '@/components/CarouselList.vue';
   import { genreArr } from '@/utils/globals';
   import { onMounted } from 'vue';
   import { CardType } from '@/types';
@@ -33,7 +33,7 @@
       <div class="genreCarousel" v-for="genre in genreArr" :key="genre">
         <h3 :id="genre">{{ genre }}</h3>
         <div class="divider" />
-        <Carousel :cardType="CardType.Show" :cards="genreList(genre)" />
+        <CarouselList :cardType="CardType.Show" :cards="genreList(genre)" />
       </div>
     </div>
   </div>

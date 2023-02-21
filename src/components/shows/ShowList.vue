@@ -5,7 +5,7 @@
 </script>
 
 <template>
-  <div v-if="searchedShows !== null" class="list">
+  <div id="showListContainer">
     <ShowItem
       v-for="show in searchedShows"
       v-bind:key="show.id"
@@ -13,31 +13,24 @@
       :show="show"
     />
   </div>
-  <h1 v-else>No Recipes Found</h1>
 </template>
 
 <style scoped>
-  .list {
+  #showListContainer {
     display: grid;
     align-items: center;
     grid-template-columns: repeat(1, 1fr);
     grid-auto-rows: 21rem;
   }
 
-  h1 {
-    margin-top: 3rem !important;
-    text-align: center;
-    color: #005e5d;
-  }
-
   @media only screen and (min-width: 600px) {
-    .list {
+    #showListContainer {
       grid-template-columns: repeat(2, 1fr);
     }
   }
 
   @media only screen and (min-width: 992px) {
-    .list {
+    #showListContainer {
       grid-template-columns: repeat(3, 1fr);
     }
   }

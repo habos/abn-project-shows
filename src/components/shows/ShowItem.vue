@@ -2,6 +2,7 @@
   import { RouterLink } from 'vue-router';
   import MissingImage from '../../assets/missing-image.png';
   import StarRating from '../StarRating.vue';
+
   const props = defineProps<{
     show: any;
     bigger?: boolean;
@@ -71,7 +72,7 @@
     text-decoration: inherit;
     text-align: center;
     font-weight: normal;
-    font-size: 12px;
+    font-size: 0.75rem;
   }
 
   h4 {
