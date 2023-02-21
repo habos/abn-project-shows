@@ -2,7 +2,7 @@ import { DOMWrapper, mount } from '@vue/test-utils';
 import Dropdown from '../DropDown.vue';
 import { describe, expect, test } from '@jest/globals';
 import { routes } from '../../router';
-import { createWebHistory, createRouter, type Router } from 'vue-router';
+import { createWebHistory, createRouter } from 'vue-router';
 
 const router = createRouter({
   history: createWebHistory(),
