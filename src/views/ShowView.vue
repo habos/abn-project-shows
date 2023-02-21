@@ -4,6 +4,8 @@
   import { useRoute } from 'vue-router';
   import MissingImage from '../assets/missing-image.png';
   import StarRating from '@/components/StarRating.vue';
+  import Carousel from '@/components/Carousel.vue';
+  import { CardType } from '@/types';
   const { show, getShowInfo } = useShows();
   const route = useRoute();
 
@@ -14,14 +16,14 @@
 </script>
 
 <template>
-  <div v-if="show !== undefined" class="detailsBackground">
+  <div v-if="show !== undefined" id="detailsBackground">
     <div class="genreBar">
       <div class="bar" />
-      <h4>{{ show.genres.join(' | ') }}</h4>
+      <h4 class="barText">{{ show.genres.join(' | ') }}</h4>
     </div>
-    <div class="detailsContainer">
+    <div id="detailsContainer">
       <h1>{{ show.name }}</h1>
-      <div class="showImgAndDetails">
+      <div id="showImgAndDetails">
         <img
           v-if="show.image"
           class="image"
@@ -34,7 +36,7 @@
           :src="MissingImage"
           alt="Show Missing Image"
         />
-        <div class="showDetails">
+        <div id="showDetails">
           <h2>Show Info</h2>
           <p v-if="show.network">
             {{
@@ -73,55 +75,54 @@
           </p>
         </div>
       </div>
-      <div class="description">
+      <div id="description">
         <h2>Description</h2>
         <p v-html="show.summary"></p>
+      </div>
+      <div v-if="show._embedded.cast.length > 0">
+        <h2>Cast</h2>
+        <Carousel :card-type="CardType.Cast" :cards="show._embedded.cast" />
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-  .detailsBackground {
+  #detailsBackground {
     height: 100%;
     background-color: #1b1e21;
   }
 
-  .detailsContainer {
+  #detailsContainer {
     width: 85%;
     color: #fff;
     margin: 4rem auto;
   }
 
-  .genreBar {
-    margin-top: 3rem;
+  #showImgAndDetails {
+    min-height: 409px;
+    margin-bottom: 4rem;
     display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: space-between;
   }
 
-  .bar {
-    width: 100%;
-    height: 4px;
-    background: rgba(217, 217, 217, 0.5);
-    box-shadow: 0px 0px 50px rgba(10, 207, 131, 0.5),
-      inset 0px 0px 20px rgba(10, 207, 131, 0.5);
+  #showDetails {
+    margin-top: 2rem;
+    width: 50%;
+    background: rgba(230, 242, 243, 0.16);
+    border-radius: 10px;
+    padding: 2rem;
   }
 
-  h4 {
-    text-align: center;
-    width: 20%;
-    text-shadow: 0px 0px 25px #51aea7;
-    position: absolute;
-    left: 20%;
-    z-index: 2;
-    font-size: 15px;
-    color: #ffffff;
-    background-color: #1b1e21;
-    white-space: nowrap;
+  #description {
+    margin-bottom: 5rem;
   }
 
   h1 {
-    margin-bottom: 3rem;
+    margin-bottom: 5rem;
+    font-size: 2rem;
     text-align: center;
   }
 
@@ -133,21 +134,22 @@
   }
 
   img {
-    width: 278px;
+    width: 35%;
   }
 
-  .showImgAndDetails {
-    min-height: 409px;
-    margin-bottom: 4rem;
-    display: flex;
-    justify-content: space-between;
-  }
+  @media only screen and (min-width: 768px) {
+    #showImgAndDetails {
+      flex-direction: row;
+      align-items: initial;
+    }
 
-  .showDetails {
-    width: 697px;
+    #showDetails {
+      margin-top: 0;
+    }
 
-    background: rgba(230, 242, 243, 0.16);
-    border-radius: 10px;
-    padding: 2rem;
+    h4 {
+      left: 20%;
+      transform: translateX(0);
+    }
   }
 </style>

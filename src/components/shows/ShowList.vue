@@ -20,7 +20,7 @@
   .list {
     display: grid;
     align-items: center;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     grid-auto-rows: 21rem;
   }
 
@@ -28,5 +28,17 @@
     margin-top: 3rem !important;
     text-align: center;
     color: #005e5d;
+  }
+
+  @media only screen and (min-width: 600px) {
+    .list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media only screen and (min-width: 992px) {
+    .list {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 </style>

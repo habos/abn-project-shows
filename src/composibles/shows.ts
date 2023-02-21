@@ -12,7 +12,7 @@ const shows: Ref<any[]> = ref([]);
 const searchedShows: Ref<any[]> = ref([]);
 
 export default function useShows() {
-  //Get recipes from api based on searched name
+  //Get the first 250 shows from the api to display on the dashboard
   const getShows = async () => {
     try {
       const response = await http.get(`/shows`);
@@ -22,7 +22,7 @@ export default function useShows() {
     }
   };
 
-  //Get recipes from api based on searched name
+  //Get shows from api based on searched name
   const getSearchedShows = async (name: string) => {
     try {
       const response = await http.get(`/search/shows?q=${name}`);
@@ -32,10 +32,10 @@ export default function useShows() {
     }
   };
 
-  //Get recipe based on id
+  //Get show info along with cast based on id
   const getShowInfo = async (id: string) => {
     try {
-      const response = await http.get(`/shows/${id}`);
+      const response = await http.get(`/shows/${id}?embed=cast`);
       console.log(response.data);
       show.value = response.data;
     } catch (error: any) {

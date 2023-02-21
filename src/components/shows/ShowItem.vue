@@ -10,16 +10,25 @@
 
 <template>
   <router-link :to="{ name: 'description', params: { id: props.show.id } }">
-    <div :class="props.bigger ? 'showItem bigger' : 'showItem'">
+    <div :class="props.bigger ? 'showItem biggerItem' : 'showItem'">
       <img
         v-if="props.show.image"
-        class="image"
+        :class="props.bigger ? 'image biggerImage' : 'image'"
         :src="props.show.image.medium"
         alt="Show Image"
       />
-      <img v-else class="image" :src="MissingImage" alt="Show Missing Image" />
+      <img
+        v-else
+        :class="props.bigger ? 'image biggerImage' : 'image'"
+        :src="MissingImage"
+        alt="Show Missing Image"
+      />
       <h3 class="title">{{ props.show.name }}</h3>
-      <StarRating :rating="props.show.rating.average" />
+      <h4 v-if="bigger">{{ props.show.genres.join(' | ') }}</h4>
+      <StarRating
+        v-if="props.show.rating.average"
+        :rating="props.show.rating.average"
+      />
     </div>
   </router-link>
 </template>
@@ -39,8 +48,9 @@
     transition-duration: 0.5s;
   }
 
-  .bigger {
-    transform: scale(1.6);
+  .biggerItem {
+    width: 15rem;
+    background: rgba(65, 114, 119, 0.19);
   }
 
   .showItem:hover {
@@ -52,11 +62,19 @@
     width: 85%;
   }
 
+  .biggerImage {
+    height: 14rem;
+  }
+
   a {
     color: #fff;
     text-decoration: inherit;
     text-align: center;
     font-weight: normal;
     font-size: 12px;
+  }
+
+  h4 {
+    margin: 0 0 0.5rem 0;
   }
 </style>

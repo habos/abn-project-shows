@@ -1,14 +1,17 @@
 <script setup lang="ts">
   import { ref, onMounted, toRefs } from 'vue';
   import ShowItem from './shows/ShowItem.vue';
+  import CastItem from './CastItem.vue';
   import ArrowRight from '../assets/icons/ArrowRight.svg';
   import ArrowLeft from '../assets/icons/ArrowLeft.svg';
+  import { CardType } from '@/types';
 
   const props = defineProps<{
     cards: any[];
+    cardType: CardType;
   }>();
 
-  const { cards } = toRefs(props);
+  const { cards, cardType } = toRefs(props);
   const innerStyles = ref({});
   const step = ref('');
   const transitioning = ref(false);
@@ -85,18 +88,31 @@
 
 <template>
   <div class="carousel-container">
-    <div class="cardPreview left" />
+    <div
+      :class="
+        cardType === CardType.Cast
+          ? 'cardPreview left cardPreviewSmall'
+          : 'cardPreview left'
+      "
+    />
     <div class="navHolder prev" @click="prev">
       <img class="prevImg" :src="ArrowLeft" />
     </div>
     <div class="carousel">
       <div ref="inner" :style="innerStyles" class="inner">
         <div v-for="card in cards" :key="card" class="card">
-          <ShowItem :show="card" />
+          <ShowItem v-if="cardType === CardType.Show" :show="card" />
+          <CastItem v-else :castMember="card" />
         </div>
       </div>
     </div>
-    <div class="cardPreview right" />
+    <div
+      :class="
+        cardType === CardType.Cast
+          ? 'cardPreview right cardPreviewSmall'
+          : 'cardPreview right'
+      "
+    />
     <div class="navHolder next" @click="next">
       <img class="nextImg" :src="ArrowRight" />
     </div>
@@ -116,6 +132,7 @@
     padding: 15px 0;
     overflow: hidden;
     display: inline-block;
+    margin: auto;
   }
   .inner {
     transition: transform 0.2s;
@@ -136,6 +153,11 @@
       rgba(217, 217, 217, 0) 92.94%
     );
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  }
+
+  .cardPreviewSmall {
+    height: 160px;
+    display: none;
   }
 
   .left {
@@ -183,5 +205,11 @@
 
   .nextImg {
     margin-left: 3px;
+  }
+
+  @media only screen and (min-width: 600px) {
+    .cardPreviewSmall {
+      display: inherit;
+    }
   }
 </style>

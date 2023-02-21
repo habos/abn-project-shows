@@ -1,13 +1,16 @@
 <script setup lang="ts">
+  import { useRouter } from 'vue-router';
+
   const props = defineProps<{
     dropdownList: string[];
     title: string;
   }>();
+  const router = useRouter();
 </script>
 
 <template>
-  <div class="dropdown">
-    <button class="dropbtn">
+  <div id="dropdown" onclick="">
+    <button id="dropbtn">
       {{ props.title }}
       <div class="arrow"></div>
     </button>
@@ -16,7 +19,8 @@
       <a
         v-for="option in props.dropdownList"
         :key="option"
-        @click="$emit('optionSelected', option)"
+        @click="router.push({ name: 'home' })"
+        :href="'#' + option"
         >{{ option }}</a
       >
     </div>
@@ -24,13 +28,13 @@
 </template>
 
 <style scoped>
-  .dropbtn {
+  #dropbtn {
     background-color: #1d857c;
     color: white;
-    width: 135px;
-    height: 32px;
-    padding: 16px;
-    font-size: 16px;
+    width: 8.5rem;
+    height: 2rem;
+    padding: 1rem;
+    font-size: 1rem;
     font-weight: bold;
     display: flex;
     align-items: center;
@@ -39,7 +43,8 @@
     cursor: pointer;
     border-radius: 5px;
   }
-  .dropdown {
+
+  #dropdown {
     position: relative;
     display: inline-block;
   }
@@ -48,8 +53,8 @@
     display: none;
     position: absolute;
     background-color: #1d857c;
-    min-width: 135px;
-    height: 10rem;
+    min-width: 8.5rem;
+    height: 14rem;
     overflow: auto;
     border-radius: 5px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
@@ -59,9 +64,9 @@
   /* Links inside the dropdown */
   .dropdown-content a {
     color: white;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: bold;
-    padding: 12px 16px;
+    padding: 0.75rem 1rem;
     text-decoration: none;
     display: block;
   }
@@ -71,7 +76,7 @@
     background-color: #1f5a55;
   }
 
-  .dropdown:hover .dropdown-content {
+  #dropdown:hover .dropdown-content {
     display: block;
   }
 
@@ -84,7 +89,7 @@
     border-bottom: 7px solid white;
   }
 
-  .dropdown:hover .arrow {
+  #dropdown:hover .arrow {
     width: 0;
     height: 0;
     border-left: 7px solid transparent;
