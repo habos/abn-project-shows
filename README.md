@@ -29,15 +29,22 @@ I did not add many libraries to the base template provided by `create vue@3`.  I
 
 ### Folder structure
 
-Folder structure is pretty basic.  I organized the components in the components folder by what they are used for and added a tests folder.  Added a composibles folder for the composible and types for the `Recipe` interface.  Everything else is boilerplate for Vue.
+Folder structure is pretty basic.  I organized the components in the components folder by what they are used for and added a tests folder.  Added a composibles folder for the composible and utils for globals.  Everything else is boilerplate for Vue.
 
 ### Handling Application State
 
-Application state is handled entirely by the Vue 3 composible.  In it I have a `recipes` variable that will contain all current recipes no matter where you are in the application.
+Application state is handled entirely by the Vue 3 composible.
 
 ## Features
 
-The homescreen containes a searchbar or dropdowns dependent on which knob you select.  The live search feature allows for a constant refresh of recipes as the input is updated.  When you click on a recipe you will be brough to that recipe's description page.
+The homescreen containes carousels with genres of movies sorted by rating.  You can use the dropdown in the header to quickly navigate to a certain genre carousel.  When you click on a show you will be brought to a details page with show and cast info.  The search bar allows you to look through the whole database for shows.
+
+## Future improvements
+
+1. Use SCSS preprocessor to make cleaner css
+2. Write more tests for components
+3. Cleaner mobile design
+4. Have a frontend cache for all movies so the dashboard is not only based off the first 250
 
 ## Project Setup
 

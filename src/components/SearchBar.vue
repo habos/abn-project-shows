@@ -48,6 +48,14 @@
     font-size: 1rem;
   }
 
+  #searchQueryInput::-webkit-input-placeholder {
+    transition: opacity 0.3s linear;
+  }
+
+  #searchQueryInput:focus::-webkit-input-placeholder {
+    opacity: 0;
+  }
+
   #searchQuerySubmit {
     width: 3rem;
     height: 2rem;

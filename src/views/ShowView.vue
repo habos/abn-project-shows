@@ -69,7 +69,7 @@
           <p v-if="show.type">
             {{ 'Show Type: ' + show.type }}
           </p>
-          <p v-if="show.rating.average">
+          <p id="rating" v-if="show.rating.average">
             Rating:
             <StarRating :rating="show.rating.average" />
           </p>
@@ -118,6 +118,11 @@
 
   #description {
     margin-bottom: 5rem;
+  }
+
+  #rating {
+    display: flex;
+    align-content: center;
   }
 
   h1 {
